@@ -40,7 +40,7 @@ class Help:
 
         # Creates child window
         self.help_box = Toplevel()
-
+        
         # If users press cross at top, closes help and 'releases' help button
         self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
 
@@ -70,12 +70,6 @@ class Help:
         # Put help button back to normal
         partner.help_button.config(state=NORMAL)
         self.help_box.destroy()
-
-
-
-
-
-
 
 if __name__ == "__main__":
     root = Tk()
