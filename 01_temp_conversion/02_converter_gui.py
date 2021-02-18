@@ -9,7 +9,7 @@ class Converter:
         background_colour = "light blue"
 
         # Converter Frame
-        self.converter_frame = Frame(width=400, bg=background_colour,
+        self.converter_frame = Frame(width=300, bg=background_colour,
                                     pady=10)
         self.converter_frame.grid()
 
@@ -34,10 +34,37 @@ class Converter:
         self.to_convert_entry.grid(row=2)
 
         # Conversion buttons frame (row 3), orchid3 | khakil
+        self.conversion_buttons_frame = Frame(self.converter_frame)
+        self.conversion_buttons_frame.grid(row=3, pady=10)
 
+        self.to_c_button = Button(self.conversion_buttons_frame,
+                                  text="To Centigrade", font=("Verdana", "10"),
+                                  bg="Khaki1", padx=10, pady=10)
+        self.to_c_button.grid(row=0, column=0)
+        self.to_f_button = Button(self.conversion_buttons_frame,
+                                  text="To Fahrenheit", font=("Verdana", "10"),
+                                  bg="Orchid1", padx=10, pady=10)
+        self.to_f_button.grid(row=0, column=1)
+        
         # Answer label (row 4)
+        self.converted_label = Label(self.converter_frame,
+                                     font=("Verdana", "10"), fg="purple",
+                                     bg=background_colour, pady=10,
+                                     text="Conversion goes here")
+        self.converted_label.grid(row=4)       
 
         # History and help button frame (row 5)
+        self.hist_help_frame = Frame(self.converter_frame)
+        self.hist_help_frame.grid(row=5, pady=10)
+
+        self.calc_hist_button = Button(self.hist_help_frame, font=("Verdana", "10"),
+                                       text="Calculation History", width=15)
+        self.calc_hist_button.grid(row=0, column=0)
+
+        self.help_button = Button(self.hist_help_frame, font=("Verdana", "10"),
+                                  text="Help", width=5)
+        self.help_button.grid(row=0, column=1)
+
 
 # Main routine
 if __name__ == "__main__":
