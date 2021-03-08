@@ -7,8 +7,9 @@ import random
 class Converter:
     def __init__(self):
 
-        # Initalize variables
+        # Initalise variables
         background_colour = "light blue"
+        self.all_calculations = []
 
         # Converter frame
         self.converter_frame = Frame(bg=background_colour, pady=10)
@@ -102,6 +103,9 @@ class Converter:
                 self.to_convert_entry.configure(bg=error_colour)
             
             # Add answer to list for history
+            if answer != "Too cold":
+                self.all_calculations.append(answer)
+                print(self.all_calculations)
         
         except ValueError:
             self.converted_label.configure(text="Enter a number", fg="red")

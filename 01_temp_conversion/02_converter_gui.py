@@ -5,8 +5,9 @@ import random
 class Converter:
     def __init__(self):
 
-        # Initalize variables.
+        # Initalise variables.
         background_colour = "light blue"
+        self.all_calculations = []
 
         # Converter Frame
         self.converter_frame = Frame(width=300, bg=background_colour,
