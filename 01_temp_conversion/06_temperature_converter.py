@@ -35,7 +35,9 @@ class Converter:
         # Conversion buttons frame (row 3)
         self.conversion_buttons_frame = Frame(self.converter_frame)
         self.conversion_buttons_frame.grid(row=3, pady=10)  
-        self.to_c_button = Button(self.conversion_buttons_frame, text="To Centigrade",
+
+        # buttons (two columns)
+        self.to_c_button = Button(self.conversion_buttons_frame, text="To Centigrade", 
                                   font=("Verdana", "10", "bold"), padx=10, pady=10,
                                   bg="Khaki1", command=lambda: self.temp_convert(-459))
         self.to_c_button.grid(row=0, column=0)
@@ -46,7 +48,7 @@ class Converter:
         self.to_f_button.grid(row=0,column=1)
 
         # Answer label (row 4)
-        self.converted_label = Label(self.conversion_buttons_frame, font=("Verdana", "10", "bold"),
+        self.converted_label = Label(self.converter_frame, font=("Verdana", "10", "bold"),
                                      fg="purple", bg=background_colour, pady=10,
                                      text="Conversion goes here")
         self.converted_label.grid(row=4)
@@ -85,7 +87,7 @@ class Converter:
                 celsius = (to_convert - 32) * 5/9
                 to_convert = self.round_it(to_convert)
                 celsius = self.round_it(celsius)
-                answer = "{} degrees C is {} degrees F".format(to_convert, celsius)
+                answer = "{} degrees F is {} degrees C".format(to_convert, celsius)
             
             else:
                 answer = "Too cold"
