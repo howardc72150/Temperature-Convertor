@@ -28,8 +28,9 @@ class Convertor:
 
         # history button
         self.history_button = Button(self.converter_frame, text="History", 
-                                  padx=10, pady=10,
-                                  command=lambda: self.history(self.all_calc_list))
+                                     padx=10, pady=10,
+                                     font=("Verdana", "10", "bold"),
+                                     command=lambda: self.history(self.all_calc_list))
         self.history_button.grid(row=1)
 
     def history(self, calc_history):
@@ -67,9 +68,9 @@ class History:
         self.history_text.grid(row=1)
 
         # History output goes here (row, 3)
-
+        
         # Generate string from list of calculations
-        histroy_string = ""
+        history_string = ""
         if len(calc_history) >= 7:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history)
