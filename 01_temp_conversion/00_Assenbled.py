@@ -188,7 +188,7 @@ class History:
 
         # Export button
         self.export_button = Button(self.export_dismiss_frame, text="Export",
-                                    font=("Verdana", "10", "bold"), command=self.export)
+                                    font=("Verdana", "10", "bold"),  command=lambda: self.export(calc_history))
         self.export_button.grid(row=0, column=0)
 
         # Dismiss button
@@ -197,8 +197,8 @@ class History:
                                      command=partial(self.close_history, partner))
         self.dismiss_button.grid(row=0, column=1)
 
-    def export(self):
-        get_export = Export(self)
+    def export(self, calc_history):
+         Export(self, calc_history)
 
     def close_history(self, partner):
         # Put history button back to normal
@@ -206,7 +206,8 @@ class History:
         self.history_box.destroy()
 
 class Export:
-    def __init__(self, partner):
+    def __init__(self, partner, calc_history):
+        print(calc_history)
         background = "#a9ef99"       # --  Pale green
 
         # Disable export button
@@ -235,8 +236,8 @@ class Export:
         self.export_text = Label(self.export_frame, text="Enter a filename in the box"
                                  " below and press the save button to save your calculation"
                                  " history to a text file.",
-                                 justify=LEFT, width=10, wrap=250, bg=background)
-        #self.export_text.grid(row=1)
+                                 justify=LEFT, wrap=250, bg=background)
+        self.export_text.grid(row=1)
 
         # Warning text (label, row 2)
         self.export_text = Label(self.export_frame, text="If the filename you enter below"
