@@ -167,7 +167,7 @@ class History:
         
         # Generate string from list of calculations
         history_string = ""
-        if len(calc_history) >= 7:
+        if len(calc_history) > 7:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history)
                                                - item-1]+"\n"
@@ -247,7 +247,7 @@ class Export:
 
         # Filename entry box (row 3)
         self.filename_entry = Entry(self.export_frame, width=20,font=("Verdana", "10", "italic"),
-                                    justify=CENTER)
+                                    justify=LEFT)
         self.filename_entry.grid(row=3, pady=10)
 
         # Save and cancel frame (row 4)
@@ -255,10 +255,10 @@ class Export:
         self.save_cancel_frame.grid(row=5, pady=10)
 
         # Save and cancel buttons (row 0 of save_Cancel frame)
-        self.save_button = Button(self.save_cancel_frame, text="Save")
+        self.save_button = Button(self.save_cancel_frame, text="Save", font=("Verdana", "10", "bold"))
         self.save_button.grid(row=0, column=0)
 
-        self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
+        self.cancel_button = Button(self.save_cancel_frame, text="Cancel", font=("Verdana", "10", "bold"),
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
