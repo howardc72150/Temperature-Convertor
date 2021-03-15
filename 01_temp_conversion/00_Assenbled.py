@@ -170,7 +170,11 @@ class History:
         if len(calc_history) >= 7:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history)
-                                               -item-1]+"\n"
+                                               - item-1]+"\n"
+        else:
+            for item in range(0, len(calc_history)):
+                history_string += calc_history[len(calc_history)
+                                               - item-1]+"\n"
 
         # Label to display calculation history to user
         self.calc_label = Label(self.history_frame, text=history_string,
