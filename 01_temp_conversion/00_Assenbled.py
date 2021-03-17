@@ -309,6 +309,8 @@ class Export:
             filename = filename + ".txt"
             f = open(filename, "w+")
 
+            f.write("Temperature Conversion History\n\n")
+
             for item in calc_history:
                 f.write(item + "\n")
             
