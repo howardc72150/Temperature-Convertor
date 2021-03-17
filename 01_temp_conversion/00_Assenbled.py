@@ -1,6 +1,7 @@
 from tkinter import *
 from functools import partial
 import random
+import re
 
 
 
@@ -171,6 +172,10 @@ class History:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history)
                                                -item-1]+"\n"
+        else:
+             for item in range(0,len(calc_history)):
+                history_string += calc_history[len(calc_history)
+                                               -item-1]+"\n"   
 
         # Label to display calculation history to user
         self.calc_label = Label(self.history_frame, text=history_string,
@@ -184,7 +189,7 @@ class History:
 
         # Export button
         self.export_button = Button(self.export_dismiss_frame, text="Export",
-                                    font=("Verdana", "10", "bold"), command=self.export)
+                                    font=("Verdana", "10", "bold"), command=lambda: self.export(calc_history))
         self.export_button.grid(row=0, column=0)
 
         # Dismiss button
@@ -193,8 +198,8 @@ class History:
                                      command=partial(self.close_history, partner))
         self.dismiss_button.grid(row=0, column=1)
 
-    def export(self):
-        get_export = Export(self)
+    def export(self, calc_history):
+        get_export = Export(self, calc_history)
 
     def close_history(self, partner):
         # Put history button back to normal
@@ -202,7 +207,7 @@ class History:
         self.history_box.destroy()
 
 class Export:
-    def __init__(self, partner):
+    def __init__(self, partner, calc_history):
         background = "#a9ef99"       # --  Pale green
 
         # Disable export button
@@ -245,13 +250,20 @@ class Export:
         self.filename_entry = Entry(self.export_frame, width=20,font=("Verdana", "10", "italic"),
                                     justify=CENTER)
         self.filename_entry.grid(row=3, pady=10)
+        
+        # Error message labels (initially blank, row 4)
+        self.save_error_label = Label(self.export_frame, text="", fg="maroon",
+                                      bg=background)
+        self.save_error_label.grid(row=4)
+
 
         # Save and cancel frame (row 4)
         self.save_cancel_frame = Frame(self.export_frame)
         self.save_cancel_frame.grid(row=5, pady=10)
 
         # Save and cancel buttons (row 0 of save_Cancel frame)
-        self.save_button = Button(self.save_cancel_frame, text="Save")
+        self.save_button = Button(self.save_cancel_frame, text="Save",
+                                  command=partial(lambda: self.save_history(partner, calc_history)))
         self.save_button.grid(row=0, column=0)
 
         self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
@@ -261,6 +273,47 @@ class Export:
     def close_export(self, partner):
         partner.export_button.config(state=NORMAL)
         self.export_box.destroy()
+
+    def save_history(self, partner, calc_history):
+        # Regular expression to check filename is valid
+        regex = "[A-Za-z0-9]"
+        has_errors = "no"
+
+        filename = self.filename_entry.get()
+        print(filename)
+
+        for letter in filename:
+            if re.match(regex, letter):
+                continue
+        
+            elif letter == " ":
+                problem = "(no spaces allowed)"
+            
+            else:
+                problem = (" (no {}'s allowed)".format(letter))
+            has_errors = "yes"
+            break
+
+        if filename == "":
+            problem = "can't be blank"
+            has_errors = "yes"
+        
+        if has_errors == "yes":
+            # Display error message
+            self.save_error_label.config(text="Invalid filename - {}".format(problem))
+            # Change entry box background to pink
+            self.filename_entry.config(bg="#ffafaf")
+            print()
+        
+        else:
+            filename = filename + ".txt"
+            f = open(filename, "w+")
+
+            for item in calc_history:
+                f.write(item + "\n")
+            
+            f.close()
+            self.close_export(partner)
 
 class Help:
     def __init__(self, partner):
