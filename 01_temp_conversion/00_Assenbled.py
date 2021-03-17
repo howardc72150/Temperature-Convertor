@@ -168,14 +168,22 @@ class History:
         
         # Generate string from list of calculations
         history_string = ""
-        if len(calc_history) >= 7:
+        if len(calc_history) > 7:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history)
+<<<<<<< HEAD
                                                -item-1]+"\n"
         else:
              for item in range(0,len(calc_history)):
                 history_string += calc_history[len(calc_history)
                                                -item-1]+"\n"   
+=======
+                                               - item-1]+"\n"
+        else:
+            for item in range(0, len(calc_history)):
+                history_string += calc_history[len(calc_history)
+                                               - item-1]+"\n"
+>>>>>>> 71b381dca9d2cc6e032d09aeddef3874d08ee161
 
         # Label to display calculation history to user
         self.calc_label = Label(self.history_frame, text=history_string,
@@ -189,7 +197,11 @@ class History:
 
         # Export button
         self.export_button = Button(self.export_dismiss_frame, text="Export",
+<<<<<<< HEAD
                                     font=("Verdana", "10", "bold"), command=lambda: self.export(calc_history))
+=======
+                                    font=("Verdana", "10", "bold"),  command=lambda: self.export(calc_history))
+>>>>>>> 71b381dca9d2cc6e032d09aeddef3874d08ee161
         self.export_button.grid(row=0, column=0)
 
         # Dismiss button
@@ -199,7 +211,11 @@ class History:
         self.dismiss_button.grid(row=0, column=1)
 
     def export(self, calc_history):
+<<<<<<< HEAD
         get_export = Export(self, calc_history)
+=======
+         Export(self, calc_history)
+>>>>>>> 71b381dca9d2cc6e032d09aeddef3874d08ee161
 
     def close_history(self, partner):
         # Put history button back to normal
@@ -208,6 +224,10 @@ class History:
 
 class Export:
     def __init__(self, partner, calc_history):
+<<<<<<< HEAD
+=======
+        print(calc_history)
+>>>>>>> 71b381dca9d2cc6e032d09aeddef3874d08ee161
         background = "#a9ef99"       # --  Pale green
 
         # Disable export button
@@ -236,8 +256,8 @@ class Export:
         self.export_text = Label(self.export_frame, text="Enter a filename in the box"
                                  " below and press the save button to save your calculation"
                                  " history to a text file.",
-                                 justify=LEFT, width=10, wrap=250, bg=background)
-        #self.export_text.grid(row=1)
+                                 justify=LEFT, wrap=250, bg=background)
+        self.export_text.grid(row=1)
 
         # Warning text (label, row 2)
         self.export_text = Label(self.export_frame, text="If the filename you enter below"
@@ -248,7 +268,7 @@ class Export:
 
         # Filename entry box (row 3)
         self.filename_entry = Entry(self.export_frame, width=20,font=("Verdana", "10", "italic"),
-                                    justify=CENTER)
+                                    justify=LEFT)
         self.filename_entry.grid(row=3, pady=10)
         
         # Error message labels (initially blank, row 4)
@@ -262,11 +282,15 @@ class Export:
         self.save_cancel_frame.grid(row=5, pady=10)
 
         # Save and cancel buttons (row 0 of save_Cancel frame)
+<<<<<<< HEAD
         self.save_button = Button(self.save_cancel_frame, text="Save",
                                   command=partial(lambda: self.save_history(partner, calc_history)))
+=======
+        self.save_button = Button(self.save_cancel_frame, text="Save", font=("Verdana", "10", "bold"))
+>>>>>>> 71b381dca9d2cc6e032d09aeddef3874d08ee161
         self.save_button.grid(row=0, column=0)
 
-        self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
+        self.cancel_button = Button(self.save_cancel_frame, text="Cancel", font=("Verdana", "10", "bold"),
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
